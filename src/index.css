@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn-link {
+        @apply bg-slate-800 px-4 py-2 rounded-lg font-semibold shadow-md text-lg text-slate-50 cursor-pointer;
+    }
+
+    .btn-disabled {
+        @apply bg-gray-700 px-4 py-2 rounded-lg font-semibold shadow-md text-lg text-slate-50 cursor-not-allowed bg-opacity-50;
+    }
+
+    .my-container {
+        @apply container mx-auto px-6 py-4 max-w-md;
+    }
+}
