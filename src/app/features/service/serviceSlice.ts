@@ -26,10 +26,11 @@ const serviceSlice = createSlice({
     setAvailability: (state, action: PayloadAction<string>) => {
       state.availability = action.payload;
     },
+    resetService: () => initialState,
   },
 });
 
-export const { setMainService, setSubService, setAvailability } =
+export const { setMainService, setSubService, setAvailability, resetService } =
   serviceSlice.actions;
 
 export default serviceSlice.reducer;

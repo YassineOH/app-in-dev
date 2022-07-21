@@ -15,7 +15,7 @@ interface PayloadData {
 const initialState: UserData = {
   name: "",
   tel: null,
-  city: "",
+  city: "none",
   address: "",
 };
 
@@ -29,9 +29,10 @@ const userSlice = createSlice({
         [action.payload.name]: action.payload.value,
       };
     },
+    resetUser: () => initialState,
   },
 });
 
-export const { changeValue } = userSlice.actions;
+export const { changeValue, resetUser } = userSlice.actions;
 
 export default userSlice.reducer;
