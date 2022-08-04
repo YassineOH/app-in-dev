@@ -4,6 +4,7 @@ import CustomRadio from "./CustomRadio";
 import CustomInput from "./CustomInput";
 import CustomSelect from "./CustomSelect";
 import Alert from "./Alert";
+import Loader from "./Loader";
 
 export {
   SharedLayout,
@@ -12,4 +13,5 @@ export {
   CustomInput,
   CustomSelect,
   Alert,
+  Loader,
 };

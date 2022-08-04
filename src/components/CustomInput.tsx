@@ -9,7 +9,7 @@ const CustomInput: FC<Props> = ({ name, label, type, value }) => {
   const handleChange = (e: FormEvent) => {
     const value = (e.target as HTMLInputElement).value;
 
-    if (name === "availability") {
+    if (name === "date") {
       dispatch(setAvailability(value));
     } else {
       dispatch(changeValue({ name, value }));

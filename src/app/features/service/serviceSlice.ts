@@ -4,13 +4,13 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 export interface ServiceState {
   mainService: string;
   subService: string;
-  availability: string;
+  date: string;
 }
 
 const initialState: ServiceState = {
   mainService: "",
   subService: "",
-  availability: "",
+  date: "",
 };
 
 const serviceSlice = createSlice({
@@ -24,7 +24,7 @@ const serviceSlice = createSlice({
       state.subService = action.payload;
     },
     setAvailability: (state, action: PayloadAction<string>) => {
-      state.availability = action.payload;
+      state.date = action.payload;
     },
     resetService: () => initialState,
   },

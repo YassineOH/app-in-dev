@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface UserData {
   name: string;
-  tel: string | null;
+  phoneNumber: string | null;
   city: string;
   address: string;
 }
@@ -14,7 +14,7 @@ interface PayloadData {
 
 const initialState: UserData = {
   name: "",
-  tel: null,
+  phoneNumber: null,
   city: "none",
   address: "",
 };

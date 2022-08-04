@@ -3,40 +3,49 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaChevronLeft } from "react-icons/fa";
 
-import { CustomInput, CustomSelect, Alert } from "../components";
+import { CustomInput, CustomSelect, Alert, Loader } from "../components";
 import { resetUser } from "../app/features/user/userSlice";
 import { resetService } from "../app/features/service/serviceSlice";
 import cities from "../data/cities";
 import sendData from "../app/sendData";
 
 import type { RootState } from "../app/store";
+import type { Response } from "../app/sendData";
 
 const Send = () => {
-  const { name, tel, address } = useSelector((state: RootState) => state.user);
+  const { name, phoneNumber, address } = useSelector(
+    (state: RootState) => state.user
+  );
   const dispatch = useDispatch();
 
   const [showAlert, setShowAlert] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [response, setResponse] = useState<Response>({
+    type: "success",
+    msg: "",
+  });
 
-  const { availability } = useSelector((state: RootState) => state.service);
+  const { date } = useSelector((state: RootState) => state.service);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    sendData();
+    setIsLoading(true);
+    const { msg, type } = await sendData();
+    setResponse({ type, msg });
+    setShowAlert(true);
     dispatch(resetUser());
     dispatch(resetService());
-    setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 5000);
+    setIsLoading(false);
   };
 
   return (
     <section>
+      {isLoading && <Loader />}
       <div className="my-container flex flex-col items-center justify-center space-y-10">
         <h2 className="font-bold text-xl capitalize text-center">
           Confirmer votre information personnel
         </h2>
-        {showAlert && (
-          <Alert text="Nous avons reçu votre demande" color="green" />
-        )}
+        {showAlert && <Alert text={response.msg} type={response.type} />}
         <form className="space-y-8" onSubmit={handleSubmit}>
           <CustomInput
             type="text"
@@ -45,9 +54,9 @@ const Send = () => {
             label="Nom et Prénom :"
           />
           <CustomInput
-            type="tel"
-            value={tel || ""}
-            name="tel"
+            type="phoneNumber"
+            value={phoneNumber || ""}
+            name="phoneNumber"
             label="Numéro de téléphone :"
           />
           <CustomSelect list={cities} name="city" label="Ville :" />
@@ -59,8 +68,8 @@ const Send = () => {
           />
           <CustomInput
             type="date"
-            value={availability}
-            name="availability"
+            value={date}
+            name="date"
             label="Disponibilité :"
           />
           <input
