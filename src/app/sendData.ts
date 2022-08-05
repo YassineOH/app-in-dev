@@ -9,6 +9,7 @@ export interface Response {
 const send = async (): Promise<Response> => {
   const data = store.getState();
   const { user, service } = data;
+  console.log(user, service);
   try {
     await axios.post(import.meta.env.VITE_URL_API, {
       user,
