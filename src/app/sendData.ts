@@ -15,12 +15,12 @@ const send = async (): Promise<Response> => {
       user,
       service,
     });
-
     return {
       type: "success",
       msg: "Nous avons reçu votre demande",
     };
   } catch (error) {
+    console.log(error);
     return {
       type: "danger",
       msg: "quelque chose s'est mal passé, veuillez réessayer plus tard",
